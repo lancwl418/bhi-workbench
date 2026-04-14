@@ -106,6 +106,55 @@ export default async function DashboardLayout({
           <div className="h-px bg-gray-200 my-3" />
 
           <Link
+            href="/emails"
+            className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 transition-colors"
+          >
+            <svg className="w-[18px] h-[18px] text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+            </svg>
+            Emails
+          </Link>
+          <div className="pl-9 space-y-0.5">
+            <Link
+              href="/emails?category=return_request"
+              className="flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm text-gray-500 hover:text-gray-900 hover:bg-gray-100 transition-colors"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-orange-500" />
+              Return Request
+            </Link>
+            <Link
+              href="/emails?category=technical_support"
+              className="flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm text-gray-500 hover:text-gray-900 hover:bg-gray-100 transition-colors"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+              Technical Support
+            </Link>
+            <Link
+              href="/emails?category=missing_item"
+              className="flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm text-gray-500 hover:text-gray-900 hover:bg-gray-100 transition-colors"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-red-500" />
+              Missing Item
+            </Link>
+            <Link
+              href="/emails?category=inspection_request"
+              className="flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm text-gray-500 hover:text-gray-900 hover:bg-gray-100 transition-colors"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-purple-500" />
+              Inspection Request
+            </Link>
+            <Link
+              href="/emails?category=others"
+              className="flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm text-gray-500 hover:text-gray-900 hover:bg-gray-100 transition-colors"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-gray-400" />
+              Others
+            </Link>
+          </div>
+
+          <div className="h-px bg-gray-200 my-3" />
+
+          <Link
             href="/error-codes"
             className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 transition-colors"
           >
