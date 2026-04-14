@@ -32,6 +32,15 @@ const reasonColors: Record<string, string> = {
   other: "bg-gray-100 text-gray-600",
 };
 
+const platformLabels: Record<string, string> = {
+  homedepot: "Home Depot",
+  lowes: "Lowe's",
+  dsco: "DSCO",
+  global_industry: "Global Industry",
+  website: "Website",
+  others: "Others",
+};
+
 const outcomeConfig: Record<string, { label: string; bg: string; text: string }> = {
   refund: { label: "Refund", bg: "bg-green-50", text: "text-green-700" },
   replacement: { label: "Replacement", bg: "bg-blue-50", text: "text-blue-700" },
@@ -117,6 +126,8 @@ export default async function ReturnsPage({
               <th className="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Customer</th>
               <th className="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Product</th>
               <th className="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Model</th>
+              <th className="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">PO #</th>
+              <th className="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Platform</th>
               <th className="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Reason</th>
               <th className="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Outcome</th>
               <th className="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
@@ -144,6 +155,12 @@ export default async function ReturnsPage({
                     </td>
                     <td className="px-4 py-3.5 font-mono text-xs text-gray-500">
                       {r.model_number}
+                    </td>
+                    <td className="px-4 py-3.5 font-mono text-xs text-gray-500">
+                      {r.po_number || <span className="text-gray-300">--</span>}
+                    </td>
+                    <td className="px-4 py-3.5 text-xs text-gray-600">
+                      {r.channel ? platformLabels[r.channel] || r.channel : <span className="text-gray-300">--</span>}
                     </td>
                     <td className="px-4 py-3.5">
                       <span className={`inline-block rounded px-1.5 py-0.5 text-xs font-medium ${reasonColors[r.reason] || "bg-gray-100 text-gray-600"}`}>
@@ -173,7 +190,7 @@ export default async function ReturnsPage({
             ) : (
               <tr>
                 <td
-                  colSpan={8}
+                  colSpan={10}
                   className="px-4 py-16 text-center text-gray-400"
                 >
                   No returns found

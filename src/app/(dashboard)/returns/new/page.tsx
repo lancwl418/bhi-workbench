@@ -27,6 +27,8 @@ export default function NewReturnPage() {
       product_name: (form.get("product_name") as string) || "",
       model_number: (form.get("model_number") as string) || null,
       quantity: parseInt(form.get("quantity") as string, 10) || 1,
+      po_number: (form.get("po_number") as string) || null,
+      channel: (form.get("channel") as string) || null,
       notes: (form.get("notes") as string) || null,
     };
 
@@ -244,6 +246,37 @@ export default function NewReturnPage() {
                 defaultValue={1}
                 className="w-full rounded border px-3 py-2 text-sm"
               />
+            </div>
+          </div>
+        </fieldset>
+
+        {/* Order Info */}
+        <fieldset className="border rounded-lg p-4 space-y-4">
+          <legend className="text-sm font-medium px-2">Order Info</legend>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium mb-1">PO Number</label>
+              <input
+                name="po_number"
+                className="w-full rounded border px-3 py-2 text-sm"
+                placeholder="e.g. PO-12345"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-1">Platform</label>
+              <select
+                name="channel"
+                defaultValue=""
+                className="w-full rounded border px-3 py-2 text-sm bg-white"
+              >
+                <option value="">Select platform...</option>
+                <option value="homedepot">Home Depot</option>
+                <option value="lowes">Lowe&apos;s</option>
+                <option value="dsco">DSCO</option>
+                <option value="global_industry">Global Industry</option>
+                <option value="website">Website</option>
+                <option value="others">Others</option>
+              </select>
             </div>
           </div>
         </fieldset>

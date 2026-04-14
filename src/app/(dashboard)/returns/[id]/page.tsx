@@ -5,6 +5,7 @@ import { ReturnStatusSelect } from "./return-status-select";
 import { ReturnOutcome } from "./return-outcome";
 import { ReturnComments } from "./return-comments";
 import { ReturnPhotos } from "./return-photos";
+import { ReturnOrderInfo } from "./return-order-info";
 
 const reasonLabels: Record<string, string> = {
   product_defect: "Product Defect",
@@ -14,6 +15,15 @@ const reasonLabels: Record<string, string> = {
   customer_changed_mind: "Changed Mind",
   missing_parts: "Missing Parts",
   other: "Other",
+};
+
+const platformLabels: Record<string, string> = {
+  homedepot: "Home Depot",
+  lowes: "Lowe's",
+  dsco: "DSCO",
+  global_industry: "Global Industry",
+  website: "Website",
+  others: "Others",
 };
 
 const conditionLabels: Record<string, string> = {
@@ -124,6 +134,16 @@ export default async function ReturnDetailPage({
             <ReturnPhotos returnId={ret.id} photos={photos || []} />
           </section>
 
+          {/* Notes */}
+          {ret.notes && (
+            <section className="border rounded-lg p-4">
+              <h3 className="text-sm font-medium text-gray-700 mb-2">
+                Notes
+              </h3>
+              <p className="text-sm whitespace-pre-wrap">{ret.notes}</p>
+            </section>
+          )}
+
           {/* Outcome */}
           <section className="border rounded-lg p-4">
             <h3 className="text-sm font-medium text-gray-700 mb-2">
@@ -195,37 +215,33 @@ export default async function ReturnDetailPage({
             </dl>
           </div>
 
-          <div className="border rounded-lg p-4">
-            <h3 className="text-sm font-medium text-gray-700 mb-3">
-              Logistics
-            </h3>
-            <dl className="space-y-2 text-sm">
-              {ret.tracking_number && (
-                <div>
-                  <dt className="text-gray-400">Tracking</dt>
-                  <dd className="font-mono">{ret.tracking_number}</dd>
-                </div>
-              )}
-              {ret.carrier && (
-                <div>
-                  <dt className="text-gray-400">Carrier</dt>
-                  <dd>{ret.carrier}</dd>
-                </div>
-              )}
-              {ret.po_number && (
-                <div>
-                  <dt className="text-gray-400">PO Number</dt>
-                  <dd className="font-mono">{ret.po_number}</dd>
-                </div>
-              )}
-              {ret.channel && (
-                <div>
-                  <dt className="text-gray-400">Channel</dt>
-                  <dd>{ret.channel}</dd>
-                </div>
-              )}
-            </dl>
-          </div>
+          <ReturnOrderInfo
+            returnId={ret.id}
+            currentPoNumber={ret.po_number}
+            currentChannel={ret.channel}
+          />
+
+          {(ret.tracking_number || ret.carrier) && (
+            <div className="border rounded-lg p-4">
+              <h3 className="text-sm font-medium text-gray-700 mb-3">
+                Logistics
+              </h3>
+              <dl className="space-y-2 text-sm">
+                {ret.tracking_number && (
+                  <div>
+                    <dt className="text-gray-400">Tracking</dt>
+                    <dd className="font-mono">{ret.tracking_number}</dd>
+                  </div>
+                )}
+                {ret.carrier && (
+                  <div>
+                    <dt className="text-gray-400">Carrier</dt>
+                    <dd>{ret.carrier}</dd>
+                  </div>
+                )}
+              </dl>
+            </div>
+          )}
 
           {ret.case_id && (
             <div className="border rounded-lg p-4">
